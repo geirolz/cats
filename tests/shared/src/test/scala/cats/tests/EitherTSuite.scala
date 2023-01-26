@@ -200,6 +200,10 @@ class EitherTSuite extends CatsSuite {
     )
   }
 
+  test("unit") {
+    assert(EitherT.unit[List, String] === EitherT[List, String, Unit](List(Right(()))))
+  }
+
   test("toValidated") {
     forAll { (eithert: EitherT[List, String, Int]) =>
       assert(eithert.toValidated.map(_.toEither) === (eithert.value))

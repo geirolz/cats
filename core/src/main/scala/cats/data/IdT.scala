@@ -67,6 +67,9 @@ final case class IdT[F[_], A](value: F[A]) {
 
 object IdT extends IdTInstances {
 
+  def unit[F[_]](implicit F: Applicative[F]): IdT[F, Unit] =
+    IdT(F.unit)
+
   def pure[F[_], A](a: A)(implicit F: Applicative[F]): IdT[F, A] =
     IdT(F.pure(a))
 }

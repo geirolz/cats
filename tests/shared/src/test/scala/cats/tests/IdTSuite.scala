@@ -142,4 +142,7 @@ class IdTSuite extends CatsSuite {
     }
   }
 
+  test("unit") {
+    assert(IdT.unit[List] === IdT[List, Unit](List(())))
+  }
 }

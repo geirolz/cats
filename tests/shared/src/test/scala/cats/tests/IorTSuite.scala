@@ -117,6 +117,10 @@ class IorTSuite extends CatsSuite {
     checkAll("Eq[IorT[ListWrapper, String, Int]]", SerializableTests.serializable(Eq[IorT[ListWrapper, String, Int]]))
   }
 
+  test("unit") {
+    assert(IorT.unit[List, String] === IorT[List, String, Unit](List(Ior.right(()))))
+  }
+
   test("fold with Id consistent with Ior fold") {
     forAll { (iort: IorT[Id, String, Int], fa: String => Long, fb: Int => Long, fab: (String, Int) => Long) =>
       assert(iort.fold(fa, fb, fab) === (iort.value.fold(fa, fb, fab)))

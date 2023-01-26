@@ -669,6 +669,16 @@ object OptionT extends OptionTInstances {
   }
 
   /**
+   * Creates a `OptionT[F, Unit]`
+   *
+   * {{{
+   * scala> OptionT.unit[List]
+   * res0: OptionT[List, Unit] = OptionT(List(Some(()))))
+   * }}}
+   */
+  def unit[F[_]: Applicative]: OptionT[F, Unit] = liftF[F, Unit](Applicative[F].unit)
+
+  /**
    * Creates a `OptionT[A]` from an `A`
    *
    * {{{

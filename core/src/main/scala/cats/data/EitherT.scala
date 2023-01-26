@@ -772,6 +772,17 @@ object EitherT extends EitherTInstances {
   }
 
   /**
+   * Creates a new `EitherT[F, A, Unit]`
+   * {{{
+   * scala> import cats.data.EitherT
+   * scala> import cats.implicits._
+   * scala> EitherT.unit[Option, String]
+   * res0: cats.data.EitherT[Option,String,Unit] = EitherT(Some(()))
+   * }}}
+   */
+  final def unit[F[_]: Applicative, A]: EitherT[F, A, Unit] = liftF(Applicative[F].unit)
+
+  /**
    * Creates a new `EitherT[F, A, B]` from a `B`
    * {{{
    * scala> import cats.data.EitherT

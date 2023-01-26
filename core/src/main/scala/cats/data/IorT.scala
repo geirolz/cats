@@ -288,6 +288,17 @@ object IorT extends IorTInstances {
   }
 
   /**
+   * Creates a right version of `IorT[F, A, Unit]`
+   * {{{
+   * scala> import cats.data.IorT
+   * scala> import cats.implicits._
+   * scala> IorT.unit[Option, String]
+   * res0: cats.data.IorT[Option,String,Unit] = IorT(Some(Right(()))))
+   * }}}
+   */
+  final def unit[F[_]: Applicative, A]: IorT[F, A, Unit] = liftF[F, A, Unit](Applicative[F].unit)
+
+  /**
    * Creates a right version of `IorT[F, A, B]` from a `B`
    * {{{
    * scala> import cats.data.IorT
